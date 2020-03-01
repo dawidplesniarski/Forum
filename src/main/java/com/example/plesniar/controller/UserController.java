@@ -35,8 +35,8 @@ class UserController {
   }
 
   @PostMapping("/addPost")
-  public ResponseEntity<PostDto> addPost(@RequestBody String userLogin, String content){
-    final PostDto post = postService.addPost(userLogin,content);
+  public ResponseEntity<PostDto> addPost(@RequestBody String content){
+    final PostDto post = postService.addPost(loggedUser.getLogin(),content);
 
     return ResponseEntity.ok(post);
   }
