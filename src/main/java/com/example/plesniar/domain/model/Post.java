@@ -1,5 +1,7 @@
 package com.example.plesniar.domain.model;
 
+import com.example.plesniar.domain.dto.PostDto;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -39,4 +41,17 @@ public class Post {
   public LocalDateTime getDate() {
     return date;
   }
+
+  public PostDto dto() {
+    return new PostDto(id, content, userLogin, date);
+  }
+
+//  public PostDto dto() {
+//    return PostDto.builder()
+//            .postId(id)
+//            .content(content)
+//            .createdOn(date)
+//            .authorLogin(userLogin)
+//            .build();
+//  }
 }

@@ -2,15 +2,14 @@ package com.example.plesniar.controller;
 
 import com.example.plesniar.domain.dto.PostDto;
 import com.example.plesniar.domain.dto.UserDto;
+import com.example.plesniar.domain.model.Post;
+import com.example.plesniar.exception.PostNotFoundException;
 import com.example.plesniar.exception.UserNotLoggedException;
 import com.example.plesniar.service.PostService;
 import com.example.plesniar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -41,6 +40,14 @@ class UserController {
 
     final PostDto post = postService.addPost(loggedUser.getLogin(),content);
 
+    return ResponseEntity.ok(post);
+  }
+
+  @GetMapping("/getPost/{id}")
+  public ResponseEntity<PostDto> getPosts(@PathVariable Long id) throws Exception {
+
+    final PostDto post = postService.getPost(id);
+    System.out.println(post.toString());
     return ResponseEntity.ok(post);
   }
 }
