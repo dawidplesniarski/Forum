@@ -2,6 +2,7 @@ package com.example.plesniar.controller;
 
 import com.example.plesniar.domain.dto.PostDto;
 import com.example.plesniar.domain.dto.UserDto;
+import com.example.plesniar.exception.UserNotLoggedException;
 import com.example.plesniar.service.PostService;
 import com.example.plesniar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ class UserController {
 
   @PostMapping("/addPost")
   public ResponseEntity<PostDto> addPost(@RequestBody String content){
+    if(loggedUser.getLogin() == null) throw new UserNotLoggedException();
+
     final PostDto post = postService.addPost(loggedUser.getLogin(),content);
 
     return ResponseEntity.ok(post);
