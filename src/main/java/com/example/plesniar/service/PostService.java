@@ -18,10 +18,10 @@ public class PostService {
     this.postRepository = postRepository;
   }
 
+
   public PostDto addPost(String userLogin, String content) {
     final Post post = new Post(content, userLogin, LocalDateTime.now());
     final Post savedPost = postRepository.save(post);
-
     return new PostDto(savedPost.getId(), savedPost.getContent(), savedPost.getUserLogin(), savedPost.getDate());
   }
 
