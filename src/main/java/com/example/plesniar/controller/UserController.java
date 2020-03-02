@@ -3,7 +3,6 @@ package com.example.plesniar.controller;
 import com.example.plesniar.domain.dto.PostDto;
 import com.example.plesniar.domain.dto.UserDto;
 import com.example.plesniar.domain.model.Post;
-import com.example.plesniar.exception.PostNotFoundException;
 import com.example.plesniar.exception.UserNotLoggedException;
 import com.example.plesniar.service.PostService;
 import com.example.plesniar.service.UserService;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -52,5 +52,12 @@ class UserController {
     System.out.println(post.toString());
 
     return ResponseEntity.ok(post);
+  }
+
+  @GetMapping("/getAllPosts")
+  @ResponseBody
+  public ResponseEntity<List<Post>> getAllPosts(){
+    List<Post> posts = postService.findAll();
+    return ResponseEntity.ok(posts);
   }
 }
