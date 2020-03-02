@@ -1,4 +1,4 @@
 package com.example.plesniar.exception;
 
-public class PostNotFoundException extends Exception {
+public class PostNotFoundException extends RuntimeException {
 }

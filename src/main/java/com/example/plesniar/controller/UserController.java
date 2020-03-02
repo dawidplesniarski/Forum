@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api")
 class UserController {
@@ -23,7 +25,6 @@ class UserController {
   public UserController(@Autowired UserService userService, PostService postService) {
     this.userService = userService;
     this.postService = postService;
-    //this.loggedUser = new UserDto(0L, "NIEPRAWIDLOWY");
   }
 
   @PostMapping("/login")
@@ -36,18 +37,20 @@ class UserController {
 
   @PostMapping("/addPost")
   public ResponseEntity<PostDto> addPost(@RequestBody String content){
-    if(loggedUser.getLogin() == null) throw new UserNotLoggedException();
+    //if(loggedUser.getLogin() == null) throw new UserNotLoggedException();
+    Optional.ofNullable(loggedUser.getLogin()).orElseThrow(UserNotLoggedException::new);
 
-    final PostDto post = postService.addPost(loggedUser.getLogin(),content);
+    final PostDto post = postService.addPost(loggedUser.getLogin(), content);
 
     return ResponseEntity.ok(post);
   }
 
   @GetMapping("/getPost/{id}")
+  @ResponseBody
   public ResponseEntity<PostDto> getPosts(@PathVariable Long id) throws Exception {
-
     final PostDto post = postService.getPost(id);
     System.out.println(post.toString());
+
     return ResponseEntity.ok(post);
   }
 }

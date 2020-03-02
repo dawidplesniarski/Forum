@@ -1,12 +1,14 @@
 package com.example.plesniar.domain.model;
 
 import com.example.plesniar.domain.dto.PostDto;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "posts2")
+@Getter
 public class Post {
 
   @Id
@@ -25,7 +27,6 @@ public class Post {
     this.userLogin = userLogin;
     this.date = date;
   }
-
   public Long getId() {
     return id;
   }

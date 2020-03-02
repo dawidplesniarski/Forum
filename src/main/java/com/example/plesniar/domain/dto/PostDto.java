@@ -1,10 +1,10 @@
 package com.example.plesniar.domain.dto;
 
-import antlr.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Builder(toBuilder = true)
@@ -13,6 +13,7 @@ public class PostDto {
   String content;
   String userLogin;
   LocalDateTime date;
+
 
   @Override
   public String toString() {
