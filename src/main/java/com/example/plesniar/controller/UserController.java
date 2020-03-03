@@ -56,8 +56,8 @@ class UserController {
 
   @GetMapping("/getAllPosts")
   @ResponseBody
-  public ResponseEntity<List<Post>> getAllPosts(){
-    List<Post> posts = postService.findAll();
+  public ResponseEntity<List<PostDto>> getAllPosts(){
+    List<PostDto> posts = postService.findAll();
     return ResponseEntity.ok(posts);
   }
 }

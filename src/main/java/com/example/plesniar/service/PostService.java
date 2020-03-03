@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -34,8 +34,8 @@ public class PostService {
               .orElseThrow(() -> new Exception("Post with Id: " + postId + " was not found")).dto();
     }
 
-  public List<Post> findAll(){
-    return postRepository.findAll();
+  public List<PostDto> findAll(){
+    return postRepository.findAll().stream().map(Post::dto).collect(Collectors.toList());
     }
 
   }
