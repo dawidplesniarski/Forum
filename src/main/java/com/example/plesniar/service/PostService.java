@@ -4,11 +4,13 @@ import com.example.plesniar.domain.dto.PostDto;
 import com.example.plesniar.domain.model.Post;
 import com.example.plesniar.domain.repositories.PostRepository;
 import com.example.plesniar.exception.PostNotFoundException;
+import com.example.plesniar.exception.UserNotLoggedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,12 +25,12 @@ public class PostService {
 
 
   public PostDto addPost(String userLogin, String content, String topic) {
+    Optional.ofNullable(userLogin).orElseThrow(UserNotLoggedException::new);
     final Post post = new Post(content, userLogin, topic, LocalDateTime.now());
     final Post savedPost = postRepository.save(post);
 
     return new PostDto(savedPost.getId(), savedPost.getContent(), savedPost.getTopic(), savedPost.getUserLogin(), savedPost.getDate());
   }
-
 
     public PostDto getPost(long postId) throws PostNotFoundException {
       return postRepository.findById(postId)
@@ -36,8 +38,6 @@ public class PostService {
     }
 
     public List<PostDto> getPostByTopic(String topic) throws PostNotFoundException {
-    //return postRepository.findById()
-      System.out.println("Service" + topic);
     return postRepository.findPostsByTopicName(topic).stream().map(Post::dto).collect(Collectors.toList());
     }
 

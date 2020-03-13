@@ -3,6 +3,7 @@ package com.example.plesniar.service;
 import com.example.plesniar.domain.model.User;
 import com.example.plesniar.domain.dto.UserDto;
 import com.example.plesniar.domain.repositories.UserRepository;
+import com.example.plesniar.exception.PasswordIncorrectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,11 @@ public class UserService {
     if (user == null) {
       return userRepository.save(new User(login,getMD5(password))).dto();
     }
-    System.out.println(userRepository.getPassword(login));
+    if(getMD5(password).equals(userRepository.getPassword(login))){
     return user.dto();
+    }else{
+      throw new PasswordIncorrectException("Password incorrect!");
+    }
   }
 
   String getMD5(String s) throws NoSuchAlgorithmException{
@@ -39,7 +43,6 @@ public class UserService {
     while (hashed.length() < 32) {
       hashed = "0" + hashed;
     }
-
     return hashed;
   }
 
