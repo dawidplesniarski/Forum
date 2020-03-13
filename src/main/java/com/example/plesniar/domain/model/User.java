@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.security.MessageDigest;
 
 @Entity
 @Table(name = "users2")

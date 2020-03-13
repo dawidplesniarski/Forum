@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ class UserController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<UserDto> loginUser(@RequestBody NewUser newUser) {
+  public ResponseEntity<UserDto> loginUser(@RequestBody NewUser newUser) throws NoSuchAlgorithmException {
     final UserDto user = userService.loginUser(newUser.getLogin(),newUser.getPassword());
     loggedUser = user;
 
