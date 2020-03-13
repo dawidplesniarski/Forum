@@ -6,14 +6,19 @@ import lombok.RequiredArgsConstructor;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Getter
 public class UserDto {
 
   private Long userId;
   private String login;
+  private String password;
 
-  public String getLogin() {
-    return login;
+  public UserDto(Long userId, String login) {
   }
+
+//  public String getLogin() {
+//    return login;
+//  }
 
   //all args constructor
 //  public UserDto(Long userId, String login, int age) {

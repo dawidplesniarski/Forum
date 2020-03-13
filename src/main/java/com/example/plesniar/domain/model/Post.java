@@ -29,32 +29,7 @@ public class Post {
   public Post(String content, String userLogin, LocalDateTime now) {
   }
 
-//  public Long getId() {
-//    return id;
-//  }
-//
-//  public String getContent() {
-//    return content;
-//  }
-//
-//  public String getUserLogin() {
-//    return userLogin;
-//  }
-//
-//  public LocalDateTime getDate() {
-//    return date;
-//  }
-
   public PostDto dto() {
     return new PostDto(id, content, userLogin, date);
   }
-
-//  public PostDto dto() {
-//    return PostDto.builder()
-//            .postId(id)
-//            .content(content)
-//            .createdOn(date)
-//            .authorLogin(userLogin)
-//            .build();
-//  }
 }

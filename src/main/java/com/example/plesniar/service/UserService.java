@@ -16,10 +16,10 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-  public UserDto loginUser(String login) {
+  public UserDto loginUser(String login, String password) {
     final User user = userRepository.findByLogin(login);
     if (user == null) {
-      return userRepository.save(new User(login)).dto();
+      return userRepository.save(new User(login,password)).dto();
     }
 
     return user.dto();

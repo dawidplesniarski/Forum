@@ -2,7 +2,7 @@ package com.example.plesniar.controller;
 
 import com.example.plesniar.domain.dto.PostDto;
 import com.example.plesniar.domain.dto.UserDto;
-import com.example.plesniar.domain.model.Post;
+import com.example.plesniar.domain.model.NewUser;
 import com.example.plesniar.exception.UserNotLoggedException;
 import com.example.plesniar.service.PostService;
 import com.example.plesniar.service.UserService;
@@ -28,8 +28,8 @@ class UserController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<UserDto> loginUser(@RequestBody String login) {
-    final UserDto user = userService.loginUser(login);
+  public ResponseEntity<UserDto> loginUser(@RequestBody NewUser newUser) {
+    final UserDto user = userService.loginUser(newUser.getLogin(),newUser.getPassword());
     loggedUser = user;
 
     return ResponseEntity.ok(user);
