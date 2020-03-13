@@ -23,8 +23,7 @@ public class Post {
   @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE NOT NULL")
   LocalDateTime date;
 
-  public Post() {
-  }
+  public Post() {}
 
   public Post(String content, String userLogin, String topic, LocalDateTime now) {
     this.content = content;

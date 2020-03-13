@@ -59,4 +59,13 @@ class UserController {
     List<PostDto> posts = postService.findAll();
     return ResponseEntity.ok(posts);
   }
+
+  @GetMapping("/getPostByTopic/{topic}")
+  @ResponseBody
+  public ResponseEntity<List<PostDto>> getPostByTopic(@PathVariable String topic){
+    System.out.println("Controller: " + topic);
+    List<PostDto> postDto = postService.getPostByTopic(topic);
+
+    return ResponseEntity.ok(postDto);
+  }
 }
