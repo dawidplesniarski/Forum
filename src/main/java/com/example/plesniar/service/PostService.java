@@ -23,7 +23,7 @@ public class PostService {
 
 
   public PostDto addPost(String userLogin, String content, String topic) {
-    final Post post = new Post(content, topic, userLogin, LocalDateTime.now());
+    final Post post = new Post(content, userLogin, topic, LocalDateTime.now());
     final Post savedPost = postRepository.save(post);
 
     return new PostDto(savedPost.getId(), savedPost.getContent(), savedPost.getTopic(), savedPost.getUserLogin(), savedPost.getDate());
