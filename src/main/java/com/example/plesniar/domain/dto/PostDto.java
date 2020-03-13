@@ -13,6 +13,7 @@ public class PostDto {
   Long id;
   String content;
   String userLogin;
+  String topic;
   LocalDateTime date;
 
   public PostDto(){}

@@ -2,6 +2,7 @@ package com.example.plesniar.controller;
 
 import com.example.plesniar.domain.dto.PostDto;
 import com.example.plesniar.domain.dto.UserDto;
+import com.example.plesniar.domain.model.NewMessage;
 import com.example.plesniar.domain.model.NewUser;
 import com.example.plesniar.exception.UserNotLoggedException;
 import com.example.plesniar.service.PostService;
@@ -36,12 +37,9 @@ class UserController {
   }
 
   @PostMapping("/addPost")
-  public ResponseEntity<PostDto> addPost(@RequestBody String content){
-    //if(loggedUser.getLogin() == null) throw new UserNotLoggedException();
+  public ResponseEntity<PostDto> addPost(@RequestBody NewMessage newMessage){
     Optional.ofNullable(loggedUser.getLogin()).orElseThrow(UserNotLoggedException::new);
-
-    final PostDto post = postService.addPost(loggedUser.getLogin(), content);
-    //final PostDto post = postService.addPost("dawid","siema");
+    final PostDto post = postService.addPost(loggedUser.getLogin(), newMessage.getMessage(), newMessage.getTopic());
 
     return ResponseEntity.ok(post);
   }

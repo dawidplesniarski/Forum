@@ -21,11 +21,11 @@ public class PostService {
   }
 
 
-  public PostDto addPost(String userLogin, String content) {
-    final Post post = new Post(content, userLogin, LocalDateTime.now());
+  public PostDto addPost(String userLogin, String content, String topic) {
+    final Post post = new Post(content, topic, userLogin, LocalDateTime.now());
     final Post savedPost = postRepository.save(post);
 
-    return new PostDto(savedPost.getId(), savedPost.getContent(), savedPost.getUserLogin(), savedPost.getDate());
+    return new PostDto(savedPost.getId(), savedPost.getContent(), savedPost.getTopic(), savedPost.getUserLogin(), savedPost.getDate());
   }
 
 
@@ -39,9 +39,3 @@ public class PostService {
     }
 
   }
-
-
-
-  //1. do kontrolera usera dodaj metode addPost, pamietaj o pobraniu zalogowanego usera
-  //2. dodaj metode getPost w service a potem w kontrolerze -> zwraca PostDto, pobiera post po long id, wyszukuje Post w bazie, zmienia na PostDto i zwraca ten dto, pamietaj o wyjatkach nullach itp
-
