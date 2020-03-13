@@ -41,6 +41,7 @@ class UserController {
     Optional.ofNullable(loggedUser.getLogin()).orElseThrow(UserNotLoggedException::new);
 
     final PostDto post = postService.addPost(loggedUser.getLogin(), content);
+    //final PostDto post = postService.addPost("dawid","siema");
 
     return ResponseEntity.ok(post);
   }

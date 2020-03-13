@@ -27,6 +27,9 @@ public class Post {
   }
 
   public Post(String content, String userLogin, LocalDateTime now) {
+    this.content = content;
+    this.userLogin = userLogin;
+    date = now;
   }
 
   public PostDto dto() {

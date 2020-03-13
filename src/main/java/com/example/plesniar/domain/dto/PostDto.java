@@ -15,6 +15,7 @@ public class PostDto {
   String userLogin;
   LocalDateTime date;
 
+  public PostDto(){}
 
   @Override
   public String toString() {
